@@ -28,6 +28,7 @@ import color_utils
 
 import optparse
 
+BRIGHT = 255
 
 #-------------------------------------------------------------------------------
 # handle command line
@@ -110,9 +111,9 @@ while True:
         blackstripes_offset = color_utils.cos(t, offset=0.9, period=60, minn=-0.5, maxx=3)
         blackstripes = color_utils.clamp(blackstripes + blackstripes_offset, 0, 1)
         # 3 sine waves for r, g, b which are out of sync with each other
-        r = blackstripes * color_utils.remap(math.cos((t/speed_r + pct*freq_r)*math.pi*2), -1, 1, 0, 256)
-        g = blackstripes * color_utils.remap(math.cos((t/speed_g + pct*freq_g)*math.pi*2), -1, 1, 0, 256)
-        b = blackstripes * color_utils.remap(math.cos((t/speed_b + pct*freq_b)*math.pi*2), -1, 1, 0, 256)
+        r = blackstripes * color_utils.remap(math.cos((t/speed_r + pct*freq_r)*math.pi*2), -1, 1, 0, BRIGHT)
+        g = blackstripes * color_utils.remap(math.cos((t/speed_g + pct*freq_g)*math.pi*2), -1, 1, 0, BRIGHT)
+        b = blackstripes * color_utils.remap(math.cos((t/speed_b + pct*freq_b)*math.pi*2), -1, 1, 0, BRIGHT)
         pixels.append((r, g, b))
     client.put_pixels(pixels, channel=0)
     time.sleep(1 / fps)
